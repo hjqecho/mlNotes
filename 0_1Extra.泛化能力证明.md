@@ -73,7 +73,7 @@ $$
 > - $P(X\le\mu-\epsilon)$​​称为左尾概率（lower tail probability）
 > - $P(|X-\mu|\ge\epsilon)$称为双尾概率（two-sided tail probability）
 
-![image-20220125151830804](0_1Extra.泛化能力证明.assets/image-20220125151830804.png)
+![image-20220125151830804](assets/0_1Extra.泛化能力证明.assets/image-20220125151830804.png)
 
 ### 损失函数
 
@@ -185,11 +185,13 @@ P(X\ge \epsilon)&=\int_{X\ge \epsilon}p(x)dx\qquad(1)\\
 \end{align}
 $$
 
-由$(1)$​​变到$(2)$​​可由$P(X\ge \epsilon)$​​中的$X\ge \epsilon$​​得出，将$\epsilon$​​移到右边得到$\frac{X}{\epsilon}\ge1$​​，带入$(1)$​​式可得$(2)$​​​​式。
+由$(1)$​​变到$(2)$​​可由$P(X\ge \epsilon)$​​中的$X\ge \epsilon$​​得出，将$\epsilon$​​移到右边得到$\frac{X}{\epsilon}\ge1$​​，带入$(1)$​​式可得$(2)$​​​​​式。
+
+---
 
 将该不等式推广到一切测度空间上：
 
-> 设$(\Omega,\Sigma,\mu)$为一测量空间，$f:\Omega\rightarrow\mathbb{R}$​为一可测函数,对任意$\epsilon>0$，则有$\mu(x\in\Omega:f(x)\ge\epsilon)\le\cfrac{1}{\epsilon}\int_{\Omega}f(x)d\mu$
+> 设$(\Omega,\mathcal{A},\mathbb{P})$​为概率空间，$f:\Omega\rightarrow\mathbb{R}$​为一可测函数,对任意$\epsilon>0$​，则有$\mu(x\in\Omega:f(x)\ge\epsilon)\le\cfrac{1}{\epsilon}\int_{\Omega}f(x)d\mu$​
 
 **证明：**
 
