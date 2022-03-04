@@ -4,6 +4,67 @@
 
 ## 先导
 
+### 期望和方差的定义和性质
+
+> 期望的**定义**：
+> 
+> 离散型：
+> 
+> $$
+> \mathbb{E}[X]=\sum_{i}^{n}x_ip_i
+> $$
+> 
+> 连续型：
+> 
+> $$
+> \mathbb{E}[X]=\int_{-\infty}^{+\infty}xf(x){\rm d}x
+> $$
+> 
+> 也称为随机变量X的均值，记做 $\bar{X}$ 
+> 
+> 期望的**性质**：
+> 
+> $$
+> \begin{aligned}
+&\mathbb{E}[C]=C,C是常数\\
+&\mathbb{E}[aX]=a\mathbb{E}[X],a是常数\\
+&\mathbb{E}[aX+bY]=a\mathbb{E}[X]+b\mathbb{E}[Y]\\
+&若X,Y相互独立，则\mathbb{E}[XY]=\mathbb{E}[X]\mathbb{E}[Y]
+\end{aligned}
+> $$
+
+> 方差的**定义**：
+> 
+> $$
+> D[X]=Var[X]:=\mathbb{E}[(X-\mathbb{E}[X])^2]
+> $$
+> 
+> 离散型：
+> 
+> $$
+> Var[X]=\sum_{i}^{n}(x_i-\mathbb{E}[X])^2p_i
+> $$
+> 
+> 连续型：
+> 
+> $$
+> Var[X]=\int_{-\infty}^{+\infty}(x-\mathbb{E}[X])^2f(x){\rm d}x
+> $$
+> 
+> 方差的**性质**：
+> 
+> $$
+> \begin{aligned}
+&Var[C]=0,C是常数\\
+&Var[CX]=C^2Var[X]\\
+&Var[aX+bY]=a^2Var[X]+b^2Var[Y]+2ab\mathbb{E}[X-EX]\mathbb{E}[Y-EY]\\
+&若X,Y相互独立，则Var[aX+bY]=a^2Var[X]+b^2Var[Y]\\
+&Var[X+b]=Var[X]\\
+&Var[aX+b]=a^2Var[X]\\
+&Var[X]=\mathbb{E}[X^2]-\mathbb{E}^2[X]
+\end{aligned}
+> $$
+
 ### 样本期望和方差的无偏估计
 
 假设 $X_1,X_2,X_3,....,X_n$ 是一个独立同分布( $i.i.d$ )随机变量序列，假设其均值 $\mu=\mathbb{E}[X]$ 及其方差 $\sigma^2=Var[X]$ 均存在。若采用如下估计量来估计 $\mu$ ，用 $\hat\mu$ 表示，同时 $\hat\mu$ 也是样本均值 $\bar{X}$ ：
@@ -14,7 +75,7 @@ $$
 \end{aligned}
 $$
 
-> 无偏估计的定义：
+> 无偏估计的**定义**：
 > 
 > $$
 > \mathbb{E}[\theta]=\theta
@@ -34,8 +95,6 @@ $$
 
  $\square$ 
 
-> 方差的定义： $Var:=\mathbb{E}[(Z-\mathbb{E}[Z])^2]$ 
-> 
 > 在总体方差中，设 $S^2$ 为其方差，表达式为：
 > 
 > $$
@@ -189,7 +248,9 @@ $$
 
 马尔可夫不等式把概率关联到数学期望，给出了随机变量的分布函数的一个宽泛但仍有用的上界。 
 
-> 定理：令 $X$ 为非负随机变量，且假设 $E(X)$ 存在，则对任意的 $\epsilon>0$ 有
+> **马尔可夫不等式**：
+> 
+> 令 $X$ 为非负随机变量，且假设 $E(X)$ 存在，则对任意的 $\epsilon>0$ 有
 > 
 > $$
 > P\{X\ge \epsilon\}\le\frac{\mathbb{E}(X)}{\epsilon}
@@ -197,7 +258,7 @@ $$
 
 马尔可夫不等式是用来估计尾部事件的概率上界，一个直观的例子是：如果 $X$ 是工资，那么 $\mathbb{E}(X)$ 就是平均工资，假设 $\epsilon=n*\mathbb{E}(X)$ ，即平均工资的 $n$ 倍。那么根据马尔可夫不等式，不超过 $\frac{1}{n}$ 的人会有超过平均工资的 $n$ 倍的工资。
 
-证明如下:
+**证明**如下:
 
 *Proof~1~:*
 
@@ -266,6 +327,8 @@ $$
 
 切比雪夫不等式是马尔可夫不等式的特殊情况，其不限定随机变量的范围，应用更广泛。
 
+> **切比雪夫不等式：**
+> 
 > 若任意随机变量 $(r.v)X$ 的期望和方差都存在，分别为 $E(X)$ 和 $Var(X)$ ，则有：
 > 
 > $$
@@ -305,23 +368,23 @@ $$
 
  $\square$ 
 
-红色部分是 $|X-\mathbb{E}(X)|\ge\epsilon$ 得到的 $\frac{|X-\mathbb{E}(X)|}{\epsilon}\ge1$ 代入
+红色部分是 $|X-\mathbb{E}(X)|\ge\epsilon$ 得到的 $\frac{|X-\mathbb{E}(X)|}{\epsilon}\ge1$ 代入。
 
 ### 三、Chernoff’s bound（切诺夫界）证明
 
 在实际应用中，由于Markov不等式和Chebyshev不等式仅用到了随机变量的一阶和二阶矩（期望和方差）特征，通常得到的界较为宽松。我们希望能够找到一个更为紧确的界。
 
-上面的切比雪夫不等式使用的是 $(X-\mathbb{E}[X])^2$ 那么也可以使用 $(X-\mathbb{E}[X])^k$ ，k为任意常数，k可能是奇数使用使用 $|X-\mathbb{E}[X]|^k$ ,再使用马尔科夫不等式得到 $\mathbb{P}(|X-\mathbb{E}[X]|\ge\epsilon)\le\cfrac{\mathbb{E}[|X-\mathbb{E}|^k]}{\epsilon^k}$ ，在这些上界中可以得到一个更小的，更紧的上界，但是对于$k$的计算也较为复杂。我们需要一个界它足够的紧，又比较方便计算，那么切诺夫界正好就满足了这两个要求，它的右侧是矩母函数。
+上面的切比雪夫不等式使用的是 $(X-\mathbb{E}[X])^2$ 那么也可以使用 $(X-\mathbb{E}[X])^k$ ，k为任意常数，k可能是奇数使用使用 $|X-\mathbb{E}[X]|^k$ ,再使用马尔科夫不等式得到 $\mathbb{P}(|X-\mathbb{E}[X]|\ge\epsilon)\le\cfrac{\mathbb{E}[|X-\mathbb{E}|^k]}{\epsilon^k}$ ，在这些上界中（不同的k值）可以得到一个更小的，更紧的上界，但是对于$k$的计算也较为复杂。我们需要一个界它足够的紧，又比较方便计算，那么切诺夫界正好就满足了这两个要求，它的右侧是矩母函数，首先先介绍矩母函数。
 
-> 矩母函数：
+> **矩母函数**：
 > 
-> 假设X为一个随机变量 $(r.v.)$ ，若存在 $h>0$ 使得对于任意 $\lambda\in[0,h],\mathbb{E}[e^{\lambda x}]$ 均存在，则称存在矩母函数（MGF），记作 $M_x(\lambda)$ ，定义式为：
+> 假设X为一个随机变量 $(r.v.)$ ，若存在 $h>0$ 使得对于任意 $t\in[0,h],\mathbb{E}[e^{t x}]$ 均存在，则称存在矩母函数（MGF），记作 $M_x(t)$ ，定义式为：
 > 
 > $$
-> M_x(\lambda):=\mathbb{E}[e^{\lambda x}]=
+> M_x(t):=\mathbb{E}[e^{tx}]=
 \begin{cases}
-\sum_xe^{\lambda x}\cdot \underset{PMF}{\underbrace{P(x)}}&x:discrete(离散)\\
-\int_xe^{\lambda x}\cdot \underset{PDF}{\underbrace{f(x)}}dx&x:continuous(连续)
+\sum_xe^{tx}\cdot \underset{PMF}{\underbrace{P(x)}}&x:discrete(离散)\\
+\int_xe^{tx}\cdot \underset{PDF}{\underbrace{f(x)}}dx&x:continuous(连续)
 \end{cases}\\
 \begin{aligned}
 &PDF:概率密度函数（probability density function），连续型\\
@@ -329,9 +392,203 @@ $$
 \end{aligned}
 > $$
 
-为什么要使用矩母函数
+矩母函数有一个较好的性质
 
-**性质：**
+> **性质**：取 $n$ 次 $M_x(t)$ 的导数并令 $t=0$ ，就可以得到 $\mathbb{E}(X^n)$ 也叫 $n$ 阶矩。即
+> 
+> $$
+> M_x^{(n)}(0)=\mathbb{E}[X^n]=\cfrac{{\rm d}^n}{{\rm d}t^n}M_x(0)
+> $$
+> 
+> 矩母函数(MGF)其实就可以看做矩生成函数，可以通过求导获取到想对应的矩。
+
+*Proof:*
+
+使用泰勒级数可以得到
+
+$$
+\begin{aligned}
+&e^x\ =1+\ x\ +\ \ \cfrac{x^2}{2!}\ \ +\ \ \cfrac{x^3}{3!}\ \ +\cdots+\ \ \cfrac{x^n}{n!}\\
+\Rightarrow
+&e^{tx}=1+tx+\cfrac{(tx)^2}{2!}+\cfrac{(tx)^3}{3!}+\cdots+\cfrac{(tx)^n}{n!}
+\end{aligned}
+$$
+
+然后取得期望
+
+$$
+\begin{aligned}
+\mathbb{E}[e^{tx}]&=
+\mathbb{E}[1+tx+\cfrac{(tx)^2}{2!}+\cfrac{(tx)^3}{3!}+\cdots+\cfrac{(tx)^n}{n!}]\\
+&=\mathbb{E}[1]+t\mathbb{E}[x]+\cfrac{t^2}{2!}\mathbb{E}[x^2]
++\cfrac{t^3}{3!}\mathbb{E}[x^3]+\cdots+\cfrac{t^n}{n!}\mathbb{E}[x^n]
+\end{aligned}
+$$
+
+假如对 $t$ 求 $1$ 阶导可得
+
+$$
+\begin{aligned}
+\cfrac{{\rm d}}{{\rm d}t}\mathbb{E}[e^{tx}]&=
+\cfrac{{\rm d}}{{\rm d}t}(\mathbb{E}[1]+t\mathbb{E}[x]+\cfrac{t^2}{2!}\mathbb{E}[x^2]
++\cfrac{t^3}{3!}\mathbb{E}[x^3]+\cdots+\cfrac{t^n}{n!}\mathbb{E}[x^n])\\
+&求完导后代入t=0\\
+&=0+\mathbb{E}[x]+0+0+\cdots+0\\
+&=\mathbb{E}[x]
+\end{aligned}
+$$
+
+同理2,3阶导也可求得 $\square$ 
+
+[为什么我们需要矩母函数](https://zhuanlan.zhihu.com/p/148408669#:~:text=%E4%B8%BA%E4%BB%80%E4%B9%88%E6%88%91%E4%BB%AC,%E9%9C%80%E8%A6%81MGF)
+
+> **重尾和轻尾**：
+> 
+> 若随机变量 $X$ 满足 $\mathbb{E}[e^{tx}]=\infty,\forall t\gt 0$ ，则称为重尾，否则就称为轻尾。
+
+重尾的就是指矩母函数不存在，轻尾的是指矩母函数存在。
+
+通过指数函数来了解这个概念，指数分布定义如下：
+
+$$
+f(x)=
+\begin{cases}
+\lambda\cdot e^{-\lambda x}&,x\ge 0\\
+0&,x\lt 0
+\end{cases}
+$$
+
+求得矩母函数为：
+
+$$
+\begin{aligned}
+M_x(t)=\mathbb{E}[e^{tx}]&=\int_0^\infty e^{tx}\cdot\lambda e^{-\lambda x}{\rm dx}\\
+&=\lambda\int_0^\infty e^{(t-\lambda)x}{\rm dx}\\
+&=\lambda\Big|\cfrac{1}{t-\lambda}e^{(t-\lambda)x}\Big|_0^\infty\\
+&=\begin{cases}
+\infty&,t-\lambda\gt 0\\
+\cfrac{\lambda}{\lambda-t}&,t-\lambda\lt 0
+\end{cases}
+\end{aligned}
+$$
+
+可以看只有当 $t-\lambda\lt0$ 时才收敛，才能求出期望，一但求出 $\cfrac{\lambda}{\lambda-t}$ ，计算矩就变成了求导的问题，比积分更容易计算期望值。
+
+---
+
+设 $t\in(0,\infty)$ ，
+
+有函数 $f(x)=\exp{(tx)}$ ，明显 $f(x)$ 单增，所以 $x_1\ge x_2\Rightarrow f(x_1)\ge f(x_2)$ ；
+
+逆函数 $f^{-1}(x)=\frac{1}{t}\ln{(x)}$ ， $f^{-1}(x)$ 单增，所以 $f(x_1)\ge f(x_2)\Rightarrow X_1\ge x_2$ 。
+
+综上可得： $x_1\ge x_2 \Leftrightarrow f(x_1)\ge f(x_2)$ 。
+
+综上可以推出以下不等式
+
+$$
+\mathbb{P}[(x-\mu)\ge\epsilon]
+=\mathbb{P}[e^{t(x-\mu)}\ge e^{t\epsilon}]
+\le\cfrac{\mathbb{E}[e^{t(x-\mu)}]}{e^{t\epsilon}},\forall\lambda\in[0,h]
+$$
+
+不等式部分使用的是马尔科夫不等式，因为 $\lambda$ 的不同，取得的上界也是不同的，所以我们就要获取一个更紧更小的下确界，这个最紧的界就是要介绍的切诺夫界。
+
+> **切诺夫界**：
+> 
+> 对任意的 $r.v.\ X$ ，假设其均值存在且为 $\mu$ ，并且其矩母函数 $M_x(t),t\in[0,h]$ ，存在，则 $X$ 的切诺夫界定义为：
+> 
+> $$
+> \begin{aligned}
+\mathbb{P}[(x-\mu)\ge\epsilon]
+&\le\inf_{\lambda\in[0,h]}\cfrac{\mathbb{E}[e^{t(x-\mu)}]}{e^{t\epsilon}}\\
+&=\inf_{\lambda\in[0,h]}\cfrac{\mathbb{E}[e^{(tx-t\mu)}]}{e^{t\epsilon}}\\
+&\overset{常数e^{t\mu}}{=}\inf_{\lambda\in[0,h]}\cfrac{\mathbb{E}[e^{tx}]}
+{e^{t\epsilon+t\mu}}\\
+&=\inf_{\lambda\in[0,h]}\cfrac{M_x(t)}
+{e^{t\epsilon+t\mu}}
+\end{aligned}
+> $$
+> 
+> 同时也可以得到一般情况下的
+> 
+> $$
+> \mathbb{P}(x\ge\epsilon)\le\inf_{\lambda\gt0}\cfrac{\mathbb{E}[e^{tx}]}{e^{t\epsilon}}\\
+> $$
+
+现在通过正态分布 $X\sim N(\mu,\sigma^2)$ 了解切诺夫界：
+
+$$
+\begin{aligned}
+M_x(t)&=\mathbb{E}[e^{tx}]\\
+&=\int_{-\infty}^\infty e^{tx}\cfrac{1}{\sqrt{2\pi}\sigma}
+e^{-\frac{(x-\mu)^2}{2\sigma^2}}{\rm d}x\\
+&=\int_{-\infty}^\infty\cfrac{1}{\sqrt{2\pi}\sigma}\
+\exp{(tx-\cfrac{(x-\mu)^2}{2\sigma^2})}{\rm d}x\\
+&=\int_{-\infty}^\infty\cfrac{1}{\sqrt{2\pi}\sigma}\
+\exp{(\cfrac{2tx\sigma^2-x^2+2x\mu-\mu^2}{2\sigma^2})}{\rm d}x\\
+&=\int_{-\infty}^\infty\cfrac{1}{\sqrt{2\pi}\sigma}\
+\exp{(-\cfrac{x^2-2x(\mu+t\sigma^2)+\mu^2}{2\sigma^2})}{\rm d}x\\
+&对\exp中分子前两项凑平方，消去与x的无关项\\
+&=\int_{-\infty}^\infty\cfrac{1}{\sqrt{2\pi}\sigma}\
+\exp{\Bigg(-\cfrac{x^2-2x(\mu+t\sigma^2)+(\mu+t\sigma^2)^2+\mu^2-(\mu+t\sigma^2)^2}{2\sigma^2}\Bigg)}{\rm d}x\\
+&=\int_{-\infty}^\infty\cfrac{1}{\sqrt{2\pi}\sigma}\
+\exp{\Bigg(-\cfrac{[x-(\mu+t\sigma^2)]^2+\mu^2-\mu^2-2\mu t\sigma^2-(t\sigma^2)^2}{2\sigma^2}\Bigg)}{\rm d}x\\
+&=\int_{-\infty}^\infty\cfrac{1}{\sqrt{2\pi}\sigma}\
+\exp{\Bigg(-\cfrac{[x-(\mu+t\sigma^2)]^2}{2\sigma^2}+\mu t+\cfrac{t^2\sigma^2}{2}\Bigg)}{\rm d}x\\
+&=\int_{-\infty}^\infty\cfrac{1}{\sqrt{2\pi}\sigma}\
+\exp{\Bigg(-\cfrac{[x-(\mu+t\sigma^2)]^2}{2\sigma^2}\Bigg)\exp{\Bigg(\mu t+\cfrac{t^2\sigma^2}{2}}\Bigg)}{\rm d}x\\
+&\exp后半部分与x无关，可以看做常数\\
+&=\exp{\Bigg(\mu t+\cfrac{t^2\sigma^2}{2}}\Bigg)\cdot\int_{-\infty}^\infty\cfrac{1}{\sqrt{2\pi}\sigma}\
+\exp{\Bigg(-\cfrac{[x-(\mu+t\sigma^2)]^2}{2\sigma^2}\Bigg)}{\rm d}x\\
+\end{aligned}
+$$
+
+后面的积分结果必为1，因为其满足 $X\sim N(\mu+t\sigma^2,\sigma^2)$ 的高斯分布，所以取得最终结果为：
+
+$$
+M_x(t)=\exp{(\mu t+\cfrac{t^2\sigma^2}{2})}
+$$
+
+显然 $M_x(t)$ 对任意 $t\gt 0$ 均有定义
+
+$$
+\begin{aligned}
+&\inf_{t\gt 0}\cfrac{\mathbb{E}[e^{t(x-\mu)}]}{e^{t\epsilon}}\\
+=&\inf_{t\gt 0}\cfrac{M_x(t)}{e^{t\epsilon+t\mu}}\\
+=&\inf_{t\gt 0}\cfrac{e^{(\mu t+\frac{t^2\sigma^2}{2})}}{e^{t\epsilon+t\mu}}\\
+=&\inf_{t\gt 0}e^{(\frac{t^2\sigma^2}{2}-t\epsilon)}
+\end{aligned}
+$$
+
+接下来求得最小值即可，因为指数函数是单调函数得：
+
+$$
+\argmin_{t\gt0}\{e^{(\frac{t^2\sigma^2}{2}-t\epsilon)}\}=\argmin_{t\gt0}\{\frac{t^2\sigma^2}{2}-t\epsilon\}
+$$
+
+将上式对 $t$ 求导得：
+
+$$
+\cfrac{{\rm d}\Big(\cfrac{t^2\sigma^2}{2}-t\epsilon\Big)}{{\rm d}t}=\sigma^2t-\epsilon
+$$
+
+然后令等式对于0求得驻点
+
+$$
+\sigma^2t-\epsilon\Rightarrow t=\cfrac{\epsilon}{\sigma^2}
+$$
+
+代入 $t$ ，求得高斯分布切诺夫界为：
+
+$$
+e^{(\frac{t^2\sigma^2}{2}-t\epsilon)}
+=e^{(\frac{\epsilon^2}{2\sigma^2}-\frac{\epsilon^2}{\sigma^2})}
+=e^{-\frac{\epsilon^2}{2\sigma^2}}\\
+\Rightarrow\mathbb{P}[(x-\mu)\ge\epsilon]\le e^{-\frac{\epsilon^2}{2\sigma^2}}
+$$
+
+---
 
 > 对于随机变量 $X$ ， $a\le X\le b$ ，且 $E(X)=0$ ，则对于 $\forall\lambda\in R$ ：
 > 
