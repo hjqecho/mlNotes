@@ -2,6 +2,24 @@
 
 ---
 
+> 参考文章及视频：
+> 
+> [泛化误差上界的证明](https://blog.csdn.net/qq_43872529/article/details/104362791 "泛化误差上界的证明")
+> 
+> [泛化误差上界](https://blog.csdn.net/deepbodhi/article/details/119823871 "泛化误差上界")
+> 
+> [马尔可夫(Markov)不等式](https://www.cnblogs.com/yanghh/p/13291411.html "马尔可夫(Markov)不等式")
+> 
+> [尾概率估计方法](https://zhuanlan.zhihu.com/p/425562737)
+> 
+> [强化学习理论基础 Sound_of_wind的个人空间_bilibili【视频】](https://space.bilibili.com/2374895/channel/seriesdetail?sid=352698&ctype=0) :+1:
+> 
+> [集合论](https://zhuanlan.zhihu.com/p/102397463)
+> 
+> [如何通俗的理解矩母函数](https://zhuanlan.zhihu.com/p/148408669)
+> 
+> [concentration-slides (stanford.edu)](https://web.stanford.edu/class/cs229t/2017/Lectures/concentration-slides.pdf)
+
 ## 先导
 
 ### 期望和方差的定义和性质
@@ -149,7 +167,7 @@ $$
 > - $P(X\le\mu-\epsilon)$ 称为左尾概率（lower tail probability）
 > - $P(|X-\mu|\ge\epsilon)$ 称为双尾概率（two-sided tail probability）
 
-![image-20220125151830804](assets/0_1Extra.泛化能力证明.assets/image-20220125151830804.png)
+<img src="assets/0_1Extra.泛化能力证明.assets/image-20220125151830804.png" alt="image-20220125151830804" style="zoom:33%;" />
 
 ### 损失函数
 
@@ -244,7 +262,7 @@ $$
 \end{aligned}
 $$
 
-### 一、Markov’s Inequality（马尔可夫不等式）及证明
+### 一、Markov’s Inequality（马尔可夫不等式）
 
 马尔可夫不等式把概率关联到数学期望，给出了随机变量的分布函数的一个宽泛但仍有用的上界。 
 
@@ -323,7 +341,7 @@ $$
 
  $\square$ 
 
-### 二、Chebyshev’s Inequality（切比雪夫不等式）及证明
+### 二、Chebyshev’s Inequality（切比雪夫不等式）
 
 切比雪夫不等式是马尔可夫不等式的特殊情况，其不限定随机变量的范围，应用更广泛。
 
@@ -370,7 +388,7 @@ $$
 
 红色部分是 $|X-\mathbb{E}(X)|\ge\epsilon$ 得到的 $\frac{|X-\mathbb{E}(X)|}{\epsilon}\ge1$ 代入。
 
-### 三、Chernoff’s bound（切诺夫界）证明
+### 三、Chernoff’s bound（切诺夫界）
 
 在实际应用中，由于Markov不等式和Chebyshev不等式仅用到了随机变量的一阶和二阶矩（期望和方差）特征，通常得到的界较为宽松。我们希望能够找到一个更为紧确的界。
 
@@ -378,10 +396,10 @@ $$
 
 > **矩母函数**：
 > 
-> 假设X为一个随机变量 $(r.v.)$ ，若存在 $h>0$ 使得对于任意 $t\in[0,h],\mathbb{E}[e^{t x}]$ 均存在，则称存在矩母函数（MGF），记作 $M_x(t)$ ，定义式为：
+> 假设X为一个随机变量 $(r.v.)$ ，若存在 $h>0$ 使得对于任意 $t\in[0,h],\mathbb{E}[e^{t X}]$ 均存在，则称存在矩母函数（MGF），记作 $M_x(t)$ ，定义式为：
 > 
 > $$
-> M_x(t):=\mathbb{E}[e^{tx}]=
+> M_X(t):=\mathbb{E}[e^{tX}]=
 \begin{cases}
 \sum_xe^{tx}\cdot \underset{PMF}{\underbrace{P(x)}}&x:discrete(离散)\\
 \int_xe^{tx}\cdot \underset{PDF}{\underbrace{f(x)}}dx&x:continuous(连续)
@@ -397,7 +415,7 @@ $$
 > **性质**：取 $n$ 次 $M_x(t)$ 的导数并令 $t=0$ ，就可以得到 $\mathbb{E}(X^n)$ 也叫 $n$ 阶矩。即
 > 
 > $$
-> M_x^{(n)}(0)=\mathbb{E}[X^n]=\cfrac{{\rm d}^n}{{\rm d}t^n}M_x(0)
+> M_X^{(n)}(0)=\mathbb{E}[X^n]=\cfrac{{\rm d}^n}{{\rm d}t^n}M_X(0)
 > $$
 > 
 > 矩母函数(MGF)其实就可以看做矩生成函数，可以通过求导获取到想对应的矩。
@@ -418,10 +436,10 @@ $$
 
 $$
 \begin{aligned}
-\mathbb{E}[e^{tx}]&=
-\mathbb{E}[1+tx+\cfrac{(tx)^2}{2!}+\cfrac{(tx)^3}{3!}+\cdots+\cfrac{(tx)^n}{n!}]\\
-&=\mathbb{E}[1]+t\mathbb{E}[x]+\cfrac{t^2}{2!}\mathbb{E}[x^2]
-+\cfrac{t^3}{3!}\mathbb{E}[x^3]+\cdots+\cfrac{t^n}{n!}\mathbb{E}[x^n]
+\mathbb{E}[e^{tX}]&=
+\mathbb{E}[1+tX+\cfrac{(tX)^2}{2!}+\cfrac{(tX)^3}{3!}+\cdots+\cfrac{(tX)^n}{n!}]\\
+&=\mathbb{E}[1]+t\mathbb{E}[X]+\cfrac{t^2}{2!}\mathbb{E}[X^2]
++\cfrac{t^3}{3!}\mathbb{E}[X^3]+\cdots+\cfrac{t^n}{n!}\mathbb{E}[X^n]
 \end{aligned}
 $$
 
@@ -429,12 +447,12 @@ $$
 
 $$
 \begin{aligned}
-\cfrac{{\rm d}}{{\rm d}t}\mathbb{E}[e^{tx}]&=
-\cfrac{{\rm d}}{{\rm d}t}(\mathbb{E}[1]+t\mathbb{E}[x]+\cfrac{t^2}{2!}\mathbb{E}[x^2]
-+\cfrac{t^3}{3!}\mathbb{E}[x^3]+\cdots+\cfrac{t^n}{n!}\mathbb{E}[x^n])\\
+\cfrac{{\rm d}}{{\rm d}t}\mathbb{E}[e^{tX}]&=
+\cfrac{{\rm d}}{{\rm d}t}(\mathbb{E}[1]+t\mathbb{E}[X]+\cfrac{t^2}{2!}\mathbb{E}[X^2]
++\cfrac{t^3}{3!}\mathbb{E}[X^3]+\cdots+\cfrac{t^n}{n!}\mathbb{E}[X^n])\\
 &求完导后代入t=0\\
-&=0+\mathbb{E}[x]+0+0+\cdots+0\\
-&=\mathbb{E}[x]
+&=0+\mathbb{E}[X]+0+0+\cdots+0\\
+&=\mathbb{E}[X]
 \end{aligned}
 $$
 
@@ -444,7 +462,7 @@ $$
 
 > **重尾和轻尾**：
 > 
-> 若随机变量 $X$ 满足 $\mathbb{E}[e^{tx}]=\infty,\forall t\gt 0$ ，则称为重尾，否则就称为轻尾。
+> 若随机变量 $X$ 满足 $\mathbb{E}[e^{tX}]=\infty,\forall t\gt 0$ ，则称为重尾，否则就称为轻尾。
 
 重尾的就是指矩母函数不存在，轻尾的是指矩母函数存在。
 
@@ -462,7 +480,7 @@ $$
 
 $$
 \begin{aligned}
-M_x(t)=\mathbb{E}[e^{tx}]&=\int_0^\infty e^{tx}\cdot\lambda e^{-\lambda x}{\rm dx}\\
+M_X(t)=\mathbb{E}[e^{tX}]&=\int_0^\infty e^{tx}\cdot\lambda e^{-\lambda x}{\rm dx}\\
 &=\lambda\int_0^\infty e^{(t-\lambda)x}{\rm dx}\\
 &=\lambda\Big|\cfrac{1}{t-\lambda}e^{(t-\lambda)x}\Big|_0^\infty\\
 &=\begin{cases}
@@ -489,38 +507,38 @@ $$
 $$
 \mathbb{P}[(x-\mu)\ge\epsilon]
 =\mathbb{P}[e^{t(x-\mu)}\ge e^{t\epsilon}]
-\le\cfrac{\mathbb{E}[e^{t(x-\mu)}]}{e^{t\epsilon}},\forall\lambda\in[0,h]
+\le\cfrac{\mathbb{E}[e^{t(X-\mu)}]}{e^{t\epsilon}},\forall\lambda\in[0,h]
 $$
 
 不等式部分使用的是马尔科夫不等式，因为 $\lambda$ 的不同，取得的上界也是不同的，所以我们就要获取一个更紧更小的下确界，这个最紧的界就是要介绍的切诺夫界。
 
 > **切诺夫界**：
 > 
-> 对任意的 $r.v.\ X$ ，假设其均值存在且为 $\mu$ ，并且其矩母函数 $M_x(t),t\in[0,h]$ ，存在，则 $X$ 的切诺夫界定义为：
+> 对任意的 $r.v.\ X$ ，假设其均值存在且为 $\mu$ ，并且其矩母函数 $M_X(t),t\in[0,h]$ ，存在，则 $X$ 的切诺夫界定义为：
 > 
 > $$
 > \begin{aligned}
-\mathbb{P}[(x-\mu)\ge\epsilon]
-&\le\inf_{\lambda\in[0,h]}\cfrac{\mathbb{E}[e^{t(x-\mu)}]}{e^{t\epsilon}}\\
-&=\inf_{\lambda\in[0,h]}\cfrac{\mathbb{E}[e^{(tx-t\mu)}]}{e^{t\epsilon}}\\
-&\overset{常数e^{t\mu}}{=}\inf_{\lambda\in[0,h]}\cfrac{\mathbb{E}[e^{tx}]}
+\mathbb{P}[(X-\mu)\ge\epsilon]
+&\le\inf_{\lambda\in[0,h]}\cfrac{\mathbb{E}[e^{t(X-\mu)}]}{e^{t\epsilon}}\\
+&=\inf_{\lambda\in[0,h]}\cfrac{\mathbb{E}[e^{(tX-t\mu)}]}{e^{t\epsilon}}\\
+&\overset{常数e^{t\mu}}{=}\inf_{\lambda\in[0,h]}\cfrac{\mathbb{E}[e^{tX}]}
 {e^{t\epsilon+t\mu}}\\
-&=\inf_{\lambda\in[0,h]}\cfrac{M_x(t)}
+&=\inf_{\lambda\in[0,h]}\cfrac{M_X(t)}
 {e^{t\epsilon+t\mu}}
 \end{aligned}
 > $$
 > 
-> 同时也可以得到一般情况下的
+> 同时也可以得到一般情况下，令 $\mathbb{E}[X]=\mu=0$ 得：
 > 
 > $$
-> \mathbb{P}(x\ge\epsilon)\le\inf_{\lambda\gt0}\cfrac{\mathbb{E}[e^{tx}]}{e^{t\epsilon}}\\
+> \mathbb{P}(X\ge\epsilon)\le\inf_{\lambda\gt0}\cfrac{\mathbb{E}[e^{tX}]}{e^{t\epsilon}}\\
 > $$
 
 现在通过正态分布 $X\sim N(\mu,\sigma^2)$ 了解切诺夫界：
 
 $$
 \begin{aligned}
-M_x(t)&=\mathbb{E}[e^{tx}]\\
+M_X(t)&=\mathbb{E}[e^{tX}]\\
 &=\int_{-\infty}^\infty e^{tx}\cfrac{1}{\sqrt{2\pi}\sigma}
 e^{-\frac{(x-\mu)^2}{2\sigma^2}}{\rm d}x\\
 &=\int_{-\infty}^\infty\cfrac{1}{\sqrt{2\pi}\sigma}\
@@ -547,15 +565,15 @@ $$
 后面的积分结果必为1，因为其满足 $X\sim N(\mu+t\sigma^2,\sigma^2)$ 的高斯分布，所以取得最终结果为：
 
 $$
-M_x(t)=\exp{(\mu t+\cfrac{t^2\sigma^2}{2})}
+M_X(t)=\exp{(\mu t+\cfrac{t^2\sigma^2}{2})}
 $$
 
-显然 $M_x(t)$ 对任意 $t\gt 0$ 均有定义
+显然 $M_X(t)$ 对任意 $t\gt 0$ 均有定义
 
 $$
 \begin{aligned}
-&\inf_{t\gt 0}\cfrac{\mathbb{E}[e^{t(x-\mu)}]}{e^{t\epsilon}}\\
-=&\inf_{t\gt 0}\cfrac{M_x(t)}{e^{t\epsilon+t\mu}}\\
+&\inf_{t\gt 0}\cfrac{\mathbb{E}[e^{t(X-\mu)}]}{e^{t\epsilon}}\\
+=&\inf_{t\gt 0}\cfrac{M_X(t)}{e^{t\epsilon+t\mu}}\\
 =&\inf_{t\gt 0}\cfrac{e^{(\mu t+\frac{t^2\sigma^2}{2})}}{e^{t\epsilon+t\mu}}\\
 =&\inf_{t\gt 0}e^{(\frac{t^2\sigma^2}{2}-t\epsilon)}
 \end{aligned}
@@ -585,26 +603,533 @@ $$
 e^{(\frac{t^2\sigma^2}{2}-t\epsilon)}
 =e^{(\frac{\epsilon^2}{2\sigma^2}-\frac{\epsilon^2}{\sigma^2})}
 =e^{-\frac{\epsilon^2}{2\sigma^2}}\\
-\Rightarrow\mathbb{P}[(x-\mu)\ge\epsilon]\le e^{-\frac{\epsilon^2}{2\sigma^2}}
+\Rightarrow\mathbb{P}[(X-\mu)\ge\epsilon]\le e^{-\frac{\epsilon^2}{2\sigma^2}}
 $$
 
 ---
 
-> 对于随机变量 $X$ ， $a\le X\le b$ ，且 $E(X)=0$ ，则对于 $\forall\lambda\in R$ ：
+### Hoeffding's Lemma（霍夫丁引理）
+
+> **次高斯性**：
+> 
+> 设 $X$ 是一个均值为 $\mu=\mathbb{E}[X]$ 的 $r.v.$ ，若存在 $\sigma\lt 0$ 使得:
 > 
 > $$
-> \mathbb{E}[e^{\lambda X}]\le e^{\frac{\lambda^2(b-a)^2}{8}}
+> \mathbb{E}[e^{\lambda(X-\mu)}]\le e^{\frac{\sigma^2\lambda^2}{2}}\quad\forall\lambda\in\mathbb{R} 
+> $$
+> 
+> 则称它为 $\sigma$ 次高斯，其中 $\sigma$ 称作次高斯参数。
+
+> **定理**：
+> 
+> 若 $X$ 为 $\sigma$ 次高斯随机变量，则 $X$ 满足：
+> 
+> $$
+> \mathbb{P}[(X-\mu)\ge\epsilon]\le e^{-\frac{\epsilon^2}{2\sigma^2}}
 > $$
 
-*Proof:*
-
-霍夫丁引理的证明主要是使用了下凸函数的性质。对于凸函数 $f(x)$ ，有：
+*Proof*：
 
 $$
-f(x)\le f(a)+\frac{f(b)-f(a)}{b-a}(x-a),a\le x\le b
+\begin{aligned}
+\mathbb{P}[(X-\mu)\ge\epsilon]&=\mathbb{P}[e^{\lambda(X-\mu)}\ge e^{\lambda\epsilon}]\\
+&\le\mathbb{E}[e^{\lambda(X-\mu)}]e^{-\lambda\epsilon}(马尔可夫不等式)\\
+&\le e^{\frac{\lambda^2\sigma^2}{2}}e^{-\lambda\epsilon}(次高性定义)\\
+&=e^{(\frac{\lambda^2\sigma^2}{2}-\lambda\epsilon)}
+\end{aligned}
 $$
 
-------
+将 $\lambda=\frac{\epsilon}{\sigma^2}$ (在切诺夫的正态分布中求过)待入上式，得：
+
+$$
+\mathbb{P}[(X-\mu)\ge\epsilon]\le e^{-\frac{\epsilon^2}{2\sigma^2}}
+$$
+
+ $\square$ 
+
+> **函数的凹凸性**：
+
+*Proof*：
+
+设函数 $f(x)$ 在区间 $I$ 上有定义，在 $I$ 内任取两点 $x_1,x_2$ ，对任意的 $\lambda\in[0,1]$ ，有 $\lambda x_1+(1-\lambda)x_2\in[x_1,x_2]$ 。
+
+<img src="assets/0_1Extra.泛化能力证明.assets/2022-03-07-18-04-16-image.png" style="zoom: 25%;" />
+
+ $A_1$ 点坐标 $(x_1,f(x_1))$ ， $A_2$ 点坐标 $(x_2,f(x_2))$ ，$A$ 点坐标 $(x,f(x))$ ，于是可求得：
+
+$$
+y_B=\cfrac{x_2-x}{x_2-x_1}f(x_1)+\cfrac{x-x_1}{x_2-x_1}f(x_2)
+$$
+
+可以得到 $y_B$ 是关于 $X$ 的一条直线，且 $A_1,A_2$ 均在直线上，令 $\lambda=\cfrac{x_2-x}{x_2-x_1}$ ，则：
+
+$$
+y_B=\lambda f(x_1)+(1-\lambda)f(x_2)
+$$
+
+可以得到 $y_B$ 的值在 $y_1$ 和 $y_2$ 之间。易推出：
+
+$$
+x=\lambda x_1+(1-\lambda)x_2
+$$
+
+通过函数图像可得
+
+$$
+y_A\le y_B
+$$
+
+所以
+
+$$
+f(x)\le\cfrac{x_2-x}{x_2-x_1}f(x_1)+\cfrac{x-x_1}{x_2-x_1}f(x_2)
+$$
+
+即
+
+$$
+f[\lambda x_{1} + (1-\lambda )x_{2}] \leq \lambda f(x_{1}) + (1-\lambda )f(x_{2}),\lambda \in (0,1)
+$$
+
+满足这个性质的函数称为凹函数，同理可证凸函数。
+
+> **霍夫丁引理**：
+> 
+> 设随机变量 $X\in[a,b]$ ，对任意的 $\lambda\in R$ 有：
+> 
+> $$
+> \mathbb{E}\big[e^{\lambda(X-\mathbb{E}[X])}\big]
+\le\exp{\{\cfrac{\lambda^2(b-a)^2}{8}\}}
+> $$
+
+*Proof~1~*：
+
+为了使推导更加的简洁，令 $E(X)=0$ ，如果取其他值也不用影响结果，所以:
+
+$$
+\mathbb{E}\big[e^{\lambda(X-\mathbb{E}[X])}\big]=\mathbb{E}\big[e^{\lambda X}\big]
+$$
+
+其中 $e^{\lambda x}$ 在区间 $[a,b]$ 上是凹函数，由凹函数的性质可得
+
+$$
+e^{\lambda X} \leq \frac{b-X}{b-a}e^{\lambda a} + \frac{X-a}{b-a}e^{\lambda b}
+$$
+
+对不等式两边求数学期望有
+
+$$
+\mathbb{E}[e^{\lambda X}]\leq\frac{b-\mathbb{E}[X]}{b-a}e^{\lambda a}
++\frac{\mathbb{E}[X]-a}{b-a}e^{\lambda b}
+$$
+
+因为 $\mathbb{E}[X]=0$ ，所以
+
+$$
+\mathbb{E}[e^{\lambda X}]\leq\frac{b}{b-a}e^{\lambda a}
+-\frac{a}{b-a}e^{\lambda b}
+$$
+
+对右侧表达式进行变换
+
+$$
+\frac{b}{b-a}e^{\lambda a}-\frac{a}{b-a}e^{\lambda b}
+=e^{\lambda a}(\frac{b}{b-a}-\frac{a}{b-a}e^{\lambda(b-a)})
+=exp\left\{\lambda a+ln(\frac{b}{b-a}-\frac{a}{b-a}e^{\lambda (b-a)})\right\}
+$$
+
+将最复杂的部分进行换元，令 $h=\lambda(b-a),p=\frac{-a}{b-a}$ 则有：
+
+$$
+exp\{\lambda a+ln(\frac{b}{b-a}-\frac{a}{b-a}e^{\lambda(b-a)})\}
+=exp\{-hp+ln(1-p+pe^{h})\}
+$$
+
+对于函数
+
+$$
+L(h)=-hp+\ln (1-p+pe^h)
+$$
+
+利用泰勒公式将其在 $x=0$ 处展开，得：
+
+$$
+L(h)=L(0)+L'(0)h+\frac{L''(\xi)}{2}h^{2}\quad \xi\in[0,h]
+$$
+
+对 $L(h)$ 求导得：
+
+$$
+\begin{aligned}
+L'(h)&=-p+\frac{pe^{h}}{1-p+pe^{h}}\\
+L''(h)&=\frac{pe^{h}(1-p+pe^{h})-p^{2}e^{2h}}{(1-p+pe^{h})^{2}}\\
+&=\frac{pe^{h}}{1-p+pe^{h}}(1-\frac{pe^{h}}{1-p+pe^{h}})\\
+&=t(1-t)\leq\frac{1}{4}(均值不等式ab\le(\frac{a+b}{2})^2)
+\end{aligned}
+$$
+
+可得 $L(0)=0,L'(0)=0$ ，所以
+
+$$
+L(h)\leq\frac{1}{8}h^{2}=\frac{\lambda^{2}(b-a)^{2}}{8}
+$$
+
+最终可得到
+
+$$
+\mathbb{E}(e^{\lambda X})\le\exp \bigg\{\cfrac{\lambda^2(b-a)^2}{8}\bigg\}
+$$
+
+ $\square$ 
+
+---
+
+*Proof~2~*:
+
+设 $P$ 为 $X$ 的概率分布，定义 $L(\lambda):=\ln\mathbb{E}_P[e^{\lambda X}]$ 。
+
+对 $L(\lambda)$ 在 $\lambda=0$ 出进行泰勒展开，得：
+
+$$
+L(\lambda) = L(0)+L'(0)\lambda+\cfrac{L''(\lambda)\lambda^2}{2!}
+$$
+
+其中 $\cfrac{L''(\lambda)\lambda^2}{2!}$ 为拉格朗日余项。因此还需求得 $L'(0)$ 和 $\cfrac{L''(\lambda)\lambda^2}{2!}$ 的值。求得：
+
+$$
+\begin{aligned}
+L'(\lambda)&=\cfrac{(\mathbb{E}_P[e^{\lambda X}])'}{\mathbb{E}_P[e^{\lambda X}]}
+=\cfrac{\mathbb{E}_P[Xe^{\lambda X}]}{\mathbb{E}_P[e^{\lambda X}]}\\
+L''(\lambda)&=\cfrac{\mathbb{E}_P[X^2e^{\lambda X}]\mathbb{E}_P[e^{\lambda X}]
+-\mathbb{E}_P[Xe^{\lambda X}]^2}{\mathbb{E}_P[e^{\lambda X}]^2}\\
+&=\cfrac{\mathbb{E}_P[X^2e^{\lambda X}]}{\mathbb{E}_P[e^{\lambda X}]}
+-\cfrac{\mathbb{E}_P[Xe^{\lambda X}]^2}{\mathbb{E}_P[e^{\lambda X}]^2}
+\end{aligned}
+$$
+
+通过计算 $L(\lambda):=\ln\mathbb{E}_P[e^{\lambda X}]$ 泰勒展开式的每一项可得：
+
+$$
+\begin{aligned}
+L(0)&=ln(1)=0\\
+L'(0)\lambda&=\cfrac{\mathbb{E}_P[Xe^{\lambda X}]}{\mathbb{E}_P[e^{\lambda X}]}\lambda
+=E_P[X]\lambda=\mu\lambda
+\end{aligned}
+$$
+
+但是拉格朗日余项中的 $\lambda$ 不知其取值，所以只能求得其范围。
+
+此时定义一个关于 $X$ 的分布 $Q_\lambda$ ：
+
+$$
+\int{\rm d}Q_\lambda=\int\cfrac{e^{\lambda x}}{\mathbb{E}_p[e^{\lambda X}]}{\rm d}P(X)
+$$
+
+所以，得到：
+
+$$
+\begin{aligned}
+L'(\lambda)&=\cfrac{\mathbb{E}_P[Xe^{\lambda X}]}{\mathbb{E}_P[e^{\lambda X}]}
+=\int x\cfrac{e^{\lambda x}}{\mathbb{E}_p[e^{\lambda X}]}{\rm d}P(X)
+=\int x{\rm d}Q_\lambda(X)=\mathbb{E}_{Q_\lambda}[X]\\
+L''(\lambda)&=\cfrac{\mathbb{E}_P[X^2e^{\lambda X}]}{\mathbb{E}_P[e^{\lambda X}]}
+-\cfrac{\mathbb{E}_P[Xe^{\lambda X}]^2}{\mathbb{E}_P[e^{\lambda X}]^2}
+=\mathbb{E}_{Q_\lambda}[X^2]-\mathbb{E}_{Q_\lambda}[X]^2=Var_{Q_\lambda}[X]
+\end{aligned}
+$$
+
+对于方差有以下性质：
+
+随机变量 $X\in[a,b]$ 中，做一个变换，令 $Y=\frac{X-a}{b-a}$ ，可以明显得到 $Y\in[0,1]$ 。根据方差定义以及性质可以得到以下等式。
+
+$$
+Var[Y]=Var\bigg[\cfrac{X-a}{b-a}\bigg]=\frac{Var[X]}{(b-a)^2}\\
+\Rightarrow Var[X]=(b-a)^2Var[Y]=(b-a)^2(E[Y^2]-E^2[Y])
+$$
+
+通过提下不等式
+
+$$
+0\le Y\le 1\Rightarrow Y^2\le Y\Rightarrow\mathbb{E}[Y^2]\le\mathbb{E}[Y]
+$$
+
+可推出以下不等式：
+
+$$
+Var[X]\le(b-1)^2(\mathbb{E}[Y]-\mathbb{E}^2[Y])=(b-1)^2\mathbb{E}[Y](1-\mathbb{E}[Y])
+$$
+
+通过均值不等式 $ab\ge(\frac{a+b}{2})^2$ 可得：
+
+$$
+Var[X]\le\cfrac{(b-a)^2}{4}
+$$
+
+所以可以得到 $L(\lambda)$ 的拉格朗日余项范围：
+
+$$
+\cfrac{L''(\lambda)\lambda^2}{2!}=\cfrac{Var_{Q_\lambda}(X)\lambda^2}{2!}
+\le\cfrac{(b-a)^2\lambda^2}{8}
+$$
+
+综合以上可得到不等式：
+
+$$
+\begin{aligned}
+&L(\lambda)\le\mu\lambda+\cfrac{(b-a)^2\lambda^2}{8}\\
+\Rightarrow&\ln \mathbb{E}_P[E^{\lambda X}]\le \mu\lambda+\cfrac{(b-a)^2\lambda^2}{8}\\
+\Rightarrow&\mathbb{E}_P[E^{\lambda X}]\le\exp
+\Big(\mu\lambda+\cfrac{(b-a)^2\lambda^2}{8}\Big)\\
+\Rightarrow&\mathbb{E}_P[E^{\lambda X}]e^{-\mu\lambda}\le\exp
+\Big(\cfrac{(b-a)^2\lambda^2}{8}\Big)(其中e^{-\mu\lambda}大于0)\\
+\Rightarrow&\mathbb{E}_P[E^{\lambda (X-\mu)}]\le\exp
+\Big(\cfrac{(\frac{b-a}{2})^2\lambda^2}{2}\Big)
+\end{aligned}
+$$
+
+ $X$ 刚好是服从 $\frac{b-a}{2}$ 为参数的次高斯分布的定义。
+
+ $\square$ 
+
+---
+
+### Hoeffding’s Inequality（霍夫丁不等式）
+
+关于次高斯的一些定理
+
+> 假设 $X$ 是 $\sigma$ 次高斯的 $r.v.$ ， $X_1,X_2$ 相互独立，分别为 $\sigma_1,\sigma_2$ 次高斯，则有：
+> 
+> 1. $Var[X]\le\sigma^2$ 。
+> 
+> 2. $\forall c$ (c是常数)有 $cX$ 是 $|x|\sigma$ 次高斯的随机变量。
+> 
+> 3. $X_1+X_2$ 是 $\sqrt{\sigma_1^2+\sigma_2^2}$ 次高斯的。
+
+*Proof*:
+
+1. 设 $Y$ 为一个 $r.v.$ 定义为 $Y=X-\mathbb{E}[X]$ 。显然 $\mathbb{E}[Y]=0,Var[Y]=Var[X]$ 根据次高斯性的定义， $Y$ 也是次高斯 $r.v.$ 且次高斯参数也是 $\sigma$ 。
+   
+   根据高斯的定义
+   
+   $$
+   M_Y(\lambda)\le e^{\frac{\sigma^2\lambda^2}{2}}
+   $$
+   
+   对于左侧将 $Y$ 的矩母函数在 $\lambda=0$ 附近泰勒展开，得：
+   
+   $$
+   \begin{aligned}
+M_Y(\lambda)&=M_Y(0)+\cfrac{M_Y'(0)}{1!}\lambda+\cfrac{M_Y''(0)}{2!}\lambda^2+
+\cfrac{M_Y^{(3)}(\lambda_1)}{3!}\lambda^3\quad\lambda_1\in[0,\lambda]\\
+&=1+0+\frac{1}{2}Var(Y)\lambda^2+\cfrac{M_Y^{(3)}(\lambda_1)}{6}\lambda^3
+\end{aligned}
+   $$
+   
+   对于右侧设 $f(\lambda):=e^{\frac{\sigma^2\lambda^2}{2}}$ ，则 $f'(x)=e^{\frac{\sigma^2\lambda^2}{2}}\lambda\sigma^2,f''(\lambda)=e^{\frac{\sigma^2\lambda^2}{2}}\lambda^2\sigma^4+e^{\frac{\sigma^2\lambda^2}{2}}\sigma^2$ ，在原点进行泰勒展开，得：
+   
+   $$
+   \begin{aligned}
+f(\lambda)&=f(0)+\cfrac{f'(0)}{1!}\lambda+\cfrac{f''(0)}{2!}\lambda^2+
+\cfrac{f^{(3)}(\lambda_2)}{3!}\lambda^3\quad\lambda_2\in[0,\lambda]\\
+&=1+0+\frac{1}{2}\sigma^2\lambda^2+\cfrac{f^{(3)}(\lambda_2)}{6}\lambda^3
+\end{aligned}
+   $$
+   
+   根据次高斯性的定义有 $M_Y(\lambda)\le f(\lambda)\quad\forall\lambda\in\mathbb{R}$ ，代入泰勒展开式得：
+
+$$
+\begin{aligned}
+&\frac{1}{2}Var(Y)\lambda^2+\cfrac{M_Y^{(3)}(\lambda_1)}{6}\lambda^3
+\le\frac{1}{2}\sigma^2\lambda^2+\cfrac{f^{(3)}(\lambda_2)}{6}\lambda^3\\
+限制\lambda\ne0,同除\lambda^2\Rightarrow&
+\frac{1}{2}Var(Y)+\cfrac{M_Y^{(3)}(\lambda_1)}{6}\lambda\le
+\frac{1}{2}\sigma^2+\cfrac{f^{(3)}(\lambda_2)}{6}\lambda\\
+\Rightarrow&
+\lim_{\lambda\rightarrow0}\frac{1}{2}Var(Y)+\cfrac{M_Y^{(3)}(\lambda_1)}{6}\lambda\le
+\lim_{\lambda\rightarrow0}\frac{1}{2}\sigma^2+\cfrac{f^{(3)}(\lambda_2)}{6}\lambda\\
+\Rightarrow&\frac{1}{2}Var(Y)\le\frac{1}{2}\sigma^2\\
+\Rightarrow&Var(Y)\le\sigma^2\\
+\Rightarrow&Var(X)\le\sigma^2
+\end{aligned}
+$$
+
+2. 因为 $X$ 是 $\sigma$ 次高斯分布的，根据次高斯性定义，有：
+   
+   $$
+   \mathbb{E}[e^{\lambda(X-\mu)}]\le e^{\frac{\lambda^2\sigma^2}{2}}
+\quad\forall\lambda\in\mathbb{R}
+   $$
+   
+   $\because\mathbb{E}[X]=\mu\therefore\mathbb{E}[cX]=c\mu$ ，所以应当证明下式：
+   
+   $$
+   \mathbb{E}[e^{\lambda(cX-c\mu)}]\le \exp \{\frac{\lambda^2(|c|\sigma^2|)}{2}\}
+\quad\forall\lambda\in\mathbb{R}
+   $$
+   
+   设 $\lambda'=c\lambda$ ，则有：
+   
+   $$
+   \mathbb{E}[e^{\lambda(cX-c\mu)}]=\mathbb{E}[e^{\lambda'(X-\mu)}]\le
+e^{\frac{(\lambda')^2\sigma^2}{2}}=e^{\frac{c^2\lambda^2\sigma^2}{2}}
+=e^{\frac{\lambda^2(|c|\sigma^2|)}{2}}
+   $$
+   
+   因此， $cX$ 是 $|c|\sigma$ 次高斯的。
+
+3. $X_1+X_2$ 是 $\sqrt{\sigma^2+\sigma^2}$ 次高斯分布随机变量
+   
+    $X_1$ 是 $\sigma_1$ 次高斯的， $\therefore\mathbb{E}[e^{\lambda(X_1-\mu_1)}]\le\exp \{\frac{\lambda^2\sigma_1^2}{2}\}$ 
+   
+    $X_2$ 是 $\sigma_2$ 次高斯的， $\therefore\mathbb{E}[e^{\lambda(X_2-\mu_2)}]\le\exp \{\frac{\lambda^2\sigma_2^2}{2}\}$ 
+   
+   则需要证明：$\mathbb{E}[\}]\le\exp \{\frac{\lambda^2(\sigma_1^2+\sigma_2^2)}{2}\}$ 
+   
+   $$
+   \begin{aligned}
+&\mathbb{E}[\exp \{\lambda[(X_1+X_2)-(\mu_1-\mu_2)]\}]\\
+=&\mathbb{E}[\exp \{\lambda(X_1-\mu_1)+\lambda(X_2-\mu_2)\}]\\
+=&\mathbb{E}[\exp \{\lambda(X_1-\mu_1)\}\cdot\exp \{\lambda(X_2-\mu_2)\}]\\
+=&\mathbb{E}[\exp \{\lambda(X_1-\mu_1)\}]\cdot\mathbb{E}[\exp \{\lambda(X_2-\mu_2)\}]\\
+\le&\exp \{\frac{\lambda^2\sigma_1^2}{2}\}\cdot\exp \{\frac{\lambda^2\sigma_2^2}{2}\}\\
+=&\exp \{\frac{\lambda^2(\sigma_1^2+\sigma_2^2)}{2}\}\\
+\end{aligned}
+   $$
+
+ $\square$ 
+
+> **霍夫丁界**：
+> 
+> 若随机变量 $X_1,X_2,\cdots,X_n$ 相互独立，且 $X_i$ 的均值为 $\mu_i$ ，次高斯参数为 $\sigma_i$ 。则对任意 $\epsilon\gt 0$ 有：
+> 
+> $$
+> \mathbb{P}\bigg[\sum_{i=1}^n(X_i-\mu_i)\ge\epsilon\bigg]
+\le\exp \bigg\{-\cfrac{\epsilon^2}{2\sum_{i=1}^{n}\sigma_i^2}\bigg\}
+> $$
+
+*Proof*:
+
+根据上面第三个定理 $X_1+X_2$ 是 $\sqrt{\sigma_1^2+\sigma_2^2}$ 次高斯可得 $\underset{i=1}{\overset{n}{\sum}}X_i$ 为 $\sqrt{\underset{i=1}{\overset{n}{\sum}}\sigma_i^2}$ 次高斯分布随机变量。
+
+根据期望是线性的(可加性)有 $\mathbb{E}[\underset{i=1}{\overset{n}{\sum}}X_i]=\underset{i=1}{\overset{n}{\sum}}\mathbb{E}[X_i]=\underset{i=1}{\overset{n}{\sum}}\mu_i$ 
+
+根据霍夫丁引理中次高斯性的定理有
+
+$$
+\mathbb{P}[(X-\mu)\ge\epsilon]\le e^{-\frac{\epsilon^2}{2\sigma^2}}
+$$
+
+将参数代入可得：
+
+$$
+\mathbb{P}\bigg[\sum_{i=1}^nX_i-\mathbb{E}[\underset{i=1}{\overset{n}{\sum}}X_i]\ge\epsilon\bigg]
+=\mathbb{P}\bigg[\sum_{i=1}^n(X_i-\mu_i)\ge\epsilon\bigg]
+\le\exp \bigg\{-\cfrac{\epsilon^2}{2\sum_{i=1}^{n}\sigma_i^2}\bigg\}
+$$
+
+ $\square$ 
+
+> **霍夫丁不等式**：
+> 
+> 若随机变量 $X_1,X_2,\cdots,X_n$ 相互独立，且 $X_i\in[a_i,b_i]\quad\forall i\in[n]$ 则：
+> 
+> $$
+> \mathbb{P}\bigg[\sum_{i=1}^n(X_i-\mu_i)\ge\epsilon\bigg]
+\le\exp \bigg\{-\cfrac{2\epsilon^2}{\sum_{i=1}^{n}(b_i-a_i)^2}\bigg\}
+> $$
+
+*Proof~1~*:
+
+ $\because X_i\in[a_i,b_i]\quad\forall i\in[n]\quad\therefore$ 根据霍夫丁引理 $X_i$ 是 $\frac{b_i-a_i}{2}$ 次高斯的。
+
+把次高斯参数代入霍夫丁界可得
+
+$$
+\mathbb{P}\bigg[\sum_{i=1}^n(X_i-\mu_i)\ge\epsilon\bigg]
+\le\exp \bigg\{-\cfrac{\epsilon^2}{2\sum_{i=1}^{n}(\frac{b_i-a_i}{2})^2}\bigg\}
+=\exp \bigg\{-\cfrac{2\epsilon^2}{\sum_{i=1}^{n}(b_i-a_i)^2}\bigg\}
+$$
+
+ $\square$ 
+
+*Proof~2~*:
+
+令 $S_n=\underset{i=1}{\overset{n}{\sum}}X_i$ ，可得：
+
+$$
+\mathbb{P}\{S_n-E[S_n]\ge\epsilon\}
+=\mathbb{P}\{e^{\lambda(S_n-E[S_n])}\ge e^{\lambda\epsilon}\}\quad\lambda\gt 0
+$$
+
+由马尔科夫不等式得：
+
+$$
+\mathbb{P}\{e^{\lambda(S_n-E[S_n])}\ge e^{\lambda\epsilon}\}
+\le\frac{\mathbb{E}[e^{\lambda(S_n-E[S_n])}]}{e^{\lambda\epsilon}}
+=\frac{\mathbb{E}[e^{\lambda\sum_{i=1}^{n}(X_i-E[X_i])}]}{e^{\lambda\epsilon}}
+=\frac{\prod_{i=1}^{n}\mathbb{E}[e^{\lambda(X_i-E[X_i])}]}{e^{\lambda\epsilon}}
+$$
+
+有霍夫丁引理得：
+
+$$
+e^{-\lambda\epsilon}\prod_{i=1}^{n}\mathbb{E}[e^{\lambda(X_i-E[X_i])}]
+\le e^{-\lambda\epsilon}\prod_{i=1}^{n}e^{\frac{\lambda^2(b_i-a_i)^2}{8}}
+=\exp \bigg\{-\lambda\epsilon+\sum_{i=1}^{n}\frac{\lambda^2(b_i-a_i)^2}{8}\bigg\}
+$$
+
+令
+
+$$
+g(\lambda)=-\lambda\epsilon+\sum_{i=1}^{n}\frac{\lambda^2(b_i-a_i)^2}{8}\quad\lambda\gt0
+$$
+
+对 $g(\lambda)$ 求导：
+
+$$
+g'(\lambda)=-\epsilon+\sum_{i=1}^{n}\frac{\lambda(b_i-a_i)^2}{4}
+$$
+
+令 $g'(\lambda)=0$ 得：
+
+$$
+\lambda^*=\frac{4\epsilon}{\sum_{i=1}^{n}(b_i-a_i)^2}\\
+g(\lambda^*)=\frac{-2\epsilon^2}{\sum_{i=1}^{n}(b_i-a_i)^2}
+$$
+
+综合上面的可得：
+
+$$
+\mathbb{P}\bigg[\sum_{i=1}^n(X_i-\mu_i)\ge\epsilon\bigg]
+\le\exp \bigg\{-\cfrac{2\epsilon^2}{\sum_{i=1}^{n}(b_i-a_i)^2}\bigg\}
+$$
+
+ $\square$ 
+
+> $$
+> \mathbb{P}\bigg[\frac{1}{N}\sum_{i=1}^n(X_i-\mu_i)\ge\epsilon\bigg]
+\le\exp \bigg\{-\cfrac{2\epsilon^2N^2}{\sum_{i=1}^{n}(b_i-a_i)^2}\bigg\}
+> $$
+
+*Proof*:
+
+$$
+\mathbb{P}\bigg[\frac{1}{N}\sum_{i=1}^n(X_i-\mu_i)\ge\epsilon\bigg]
+=\mathbb{P}\bigg[\sum_{i=1}^n(X_i-\mu_i)\ge N\epsilon\bigg]
+$$
+
+代入霍夫丁不等式可得
+
+$$
+\mathbb{P}\bigg[\frac{1}{N}\sum_{i=1}^n(X_i-\mu_i)\ge\epsilon\bigg]
+\le\exp \bigg\{-\cfrac{2\epsilon^2N^2}{\sum_{i=1}^{n}(b_i-a_i)^2}\bigg\}\\
+\Rightarrow\mathbb{P}[\bar{X}-\mathbb{E}[\bar{X}]\ge\epsilon]
+\le\exp \bigg\{-\cfrac{2\epsilon^2N^2}{\sum_{i=1}^{n}(b_i-a_i)^2}\bigg\}
+$$
+
+ $\square$ 
+
+---
 
 ## 泛化能力解释
 
@@ -628,26 +1153,3 @@ $$
 ### 泛化误差上界（generalization error bound）
 
 学习方法的泛化能力分析往往是通过研究泛化误差的概率上界进行的，简称为泛化误差上界。泛化误差即期望误差，由于其只存在理论意义，只能从理论上寻找泛化误差的概率上界。
-
-泛化误差上界性质如下：
-
-> 1. **它是样本容量的函数，当样本容量增加时，泛化上界趋于0**（样本越多，泛化上界越小）
-> 2. **它是假设空间容量（capacity）的函数，假设空间容量越大，模型就越难学，泛化误差上界就越大**（假设空间越大，泛化上界越大）
-
-------
-
-> 参考文章及视频：
-> 
-> [泛化误差上界的证明](https://blog.csdn.net/qq_43872529/article/details/104362791 "泛化误差上界的证明")
-> 
-> [泛化误差上界](https://blog.csdn.net/deepbodhi/article/details/119823871 "泛化误差上界")
-> 
-> [马尔可夫(Markov)不等式 ](https://www.cnblogs.com/yanghh/p/13291411.html "马尔可夫(Markov)不等式")
-> 
-> [尾概率估计方法](https://zhuanlan.zhihu.com/p/425562737)
-> 
-> [强化学习理论基础 Sound_of_wind的个人空间_bilibili【视频】](https://space.bilibili.com/2374895/channel/seriesdetail?sid=352698&ctype=0)
-> 
-> [集合论](https://zhuanlan.zhihu.com/p/102397463)
-> 
-> [如何通俗的理解矩母函数](https://zhuanlan.zhihu.com/p/148408669)
